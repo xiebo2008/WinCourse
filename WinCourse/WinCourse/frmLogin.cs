@@ -21,7 +21,12 @@ namespace WinCourse
         {
             string username = this.txtUsername.Text;
             string password = this.txtPassword.Text;
-
+            //忽略登录代码， 直接进入主窗体
+           // this.Hide();
+            frmExp exp = new frmExp();
+            exp.MyParent = this;
+            exp.Show();
+          //  exp.ShowDialog(); //模式窗口
         }
     }
 }

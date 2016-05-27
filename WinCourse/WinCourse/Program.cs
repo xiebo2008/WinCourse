@@ -18,7 +18,7 @@ namespace WinCourse
             //   Application.EnableVisualStyles();
             //   Application.SetCompatibleTextRenderingDefault(false);
            
-            Application.Run(new frmCal());
+            Application.Run(new frmExp());
         }
     }
 }
