@@ -30,10 +30,10 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.视图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新建ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.存盘ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.视图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -66,6 +66,18 @@
             this.文件ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.文件ToolStripMenuItem.Text = "文件";
             // 
+            // 新建ToolStripMenuItem
+            // 
+            this.新建ToolStripMenuItem.Name = "新建ToolStripMenuItem";
+            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.新建ToolStripMenuItem.Text = "新建";
+            // 
+            // 存盘ToolStripMenuItem
+            // 
+            this.存盘ToolStripMenuItem.Name = "存盘ToolStripMenuItem";
+            this.存盘ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.存盘ToolStripMenuItem.Text = "存盘";
+            // 
             // 编辑ToolStripMenuItem
             // 
             this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
@@ -77,18 +89,6 @@
             this.视图ToolStripMenuItem.Name = "视图ToolStripMenuItem";
             this.视图ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.视图ToolStripMenuItem.Text = "视图";
-            // 
-            // 新建ToolStripMenuItem
-            // 
-            this.新建ToolStripMenuItem.Name = "新建ToolStripMenuItem";
-            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.新建ToolStripMenuItem.Text = "新建";
-            // 
-            // 存盘ToolStripMenuItem
-            // 
-            this.存盘ToolStripMenuItem.Name = "存盘ToolStripMenuItem";
-            this.存盘ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.存盘ToolStripMenuItem.Text = "存盘";
             // 
             // statusStrip1
             // 
@@ -122,6 +122,8 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(214, 392);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCollapse);
+            this.treeView1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterExpand);
             // 
             // listView1
             // 
@@ -131,7 +133,6 @@
             this.listView1.Size = new System.Drawing.Size(426, 392);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // frmExp
             // 
