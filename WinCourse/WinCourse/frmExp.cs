@@ -37,6 +37,7 @@ namespace WinCourse
             foreach (var d in drives)
             {
                 TreeNode child = new TreeNode(d.Name);
+                child.Tag = d.Name;
                 root.Nodes.Add(child); //Remove
             }
         }
@@ -49,7 +50,8 @@ namespace WinCourse
                 //异常处理
                 try
                 {
-                   
+                //  var security=  System.IO.Directory.GetAccessControl(node.Text);
+          
                     LoadDir(node);
                 }
                 catch(Exception ex)
@@ -76,14 +78,62 @@ namespace WinCourse
              node.Nodes.Clear();
             //c:\\  目录的path  
            
-           string[] dirs = System.IO.Directory.GetDirectories(node.Text);
+           string[] dirs = System.IO.Directory.GetDirectories(node.Tag.ToString());
 
             foreach (var dir in dirs)
             {
-                TreeNode child = new TreeNode(dir);
+                //获取文件夹的短名称(不含路径)
+                //dir ->c:\xunlei\download-----> download    \n \t \r
+               string[] f= dir.Split('\\');
+                string shortName = f[f.Length - 1];
+                TreeNode child = new TreeNode(shortName);
+                //存储完整路径
+                child.Tag = dir;
                 node.Nodes.Add(child);
             }
 
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            string path = e.Node.Tag.ToString();
+            string[] files= System.IO.Directory.GetFiles(path);
+            this.listView1.Items.Clear();
+            foreach (string file in files)
+            {
+                string[] f = file.Split('\\');
+                string shortName = f[f.Length - 1];
+                ListViewItem item = new ListViewItem(shortName);
+                item.Tag = file;
+
+                this.listView1.Items.Add(item);
+            }
+
+        }
+
+        private void listToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.listView1.View = View.List;
+        }
+
+        private void detailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.listView1.View = View.Details;
+        }
+
+        private void tileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.listView1.View = View.Tile;
+        }
+
+        private void largeIconToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.listView1.View = View.LargeIcon;
+        }
+
+        private void smallIconToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.listView1.View = View.SmallIcon;
         }
     }
 }
