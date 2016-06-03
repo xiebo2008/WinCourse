@@ -96,6 +96,8 @@ namespace WinCourse
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (e.Node.Tag!=null)
+            { 
             string path = e.Node.Tag.ToString();
             string[] files= System.IO.Directory.GetFiles(path);
             this.listView1.Items.Clear();
@@ -108,6 +110,7 @@ namespace WinCourse
 
                 this.listView1.Items.Add(item);
             }
+          }
 
         }
 
