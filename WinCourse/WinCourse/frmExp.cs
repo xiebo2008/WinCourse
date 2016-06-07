@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +29,10 @@ namespace WinCourse
 
         private void frmExp_Load(object sender, EventArgs e)
         {
+          
             TreeNode root = new TreeNode("我的电脑");
             this.treeView1.Nodes.Add(root);
+            root.ImageIndex = 7;
 
             //获取驱动器
             var drives = System.IO.DriveInfo.GetDrives();
@@ -37,6 +40,7 @@ namespace WinCourse
             foreach (var d in drives)
             {
                 TreeNode child = new TreeNode(d.Name);
+                child.ImageIndex = 6;
                 child.Tag = d.Name;
                 root.Nodes.Add(child); //Remove
             }
@@ -87,6 +91,7 @@ namespace WinCourse
                string[] f= dir.Split('\\');
                 string shortName = f[f.Length - 1];
                 TreeNode child = new TreeNode(shortName);
+                child.ImageIndex = 0;
                 //存储完整路径
                 child.Tag = dir;
                 node.Nodes.Add(child);
@@ -96,6 +101,7 @@ namespace WinCourse
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            //加载文件
             if (e.Node.Tag!=null)
             { 
             string path = e.Node.Tag.ToString();
@@ -103,10 +109,20 @@ namespace WinCourse
             this.listView1.Items.Clear();
             foreach (string file in files)
             {
+                                       
+                    FileInfo fi = new FileInfo(file);
+                    DateTime dt = File.GetLastAccessTime(file);
+                    //  DateTime dt = fi.LastAccessTime;
+                    long length = fi.Length;
+                    int size = (int)(length / 1024.0)+1;
+                   
+                  
                 string[] f = file.Split('\\');
                 string shortName = f[f.Length - 1];
-                ListViewItem item = new ListViewItem(shortName);
+                    //  ListViewItem item = new ListViewItem(shortName);
+                    ListViewItem item = new ListViewItem(new string[] { shortName, dt.ToLocalTime().ToString(),size.ToString()+"KB" });
                 item.Tag = file;
+                 item.ImageIndex = 0;
 
                 this.listView1.Items.Add(item);
             }
